@@ -13,10 +13,11 @@ app.factory('FeedService', function ($http, $q, $rootScope, FEED_URL) {
 		self.posts.length = 0;
 		var defer = $q.defer();
 
-		superfeedr.auth('<YOUR-SUPERFEEDER-USERNAME>', '<YOUR-SUPERFEEDER-API-TOKEN>');
+		superfeedr.auth('UserName', 'Token');
 		superfeedr.setOnLoadCallback(function() {
 			var feed = new superfeedr.Feed(FEED_URL);
 			feed.load(function(result) {
+                //console.log(result);
 				$rootScope.$apply(function() {
 					angular.forEach(result.feed.entries, function (entry) {
 						self.posts.push(entry);
